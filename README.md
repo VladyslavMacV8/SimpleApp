@@ -15,3 +15,5 @@ massage can include photo or video file, user can watch video in program(importe
 enterd to background his profile in program change to offline and reverse(green/red border around small user photo in 
 collection controller). In project also has animation, few optimization, texture painted in Sketch and storyboard setting 
 for iphone/ipad with layout. 
+
+This project without other foundation
