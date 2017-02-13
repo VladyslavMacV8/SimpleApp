@@ -22,6 +22,7 @@
 #import <FirebaseDatabase/FirebaseDatabase.h>
 #import <FirebaseStorage/FirebaseStorage.h>
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "zoomPopup.h"
 
 @interface ChatViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -65,6 +66,8 @@
     }
 
     [self observeMessages];
+    
+    
 }
 
 - (IBAction)backButtonAction:(id)sender {
@@ -102,29 +105,38 @@
 
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JSQMessagesCollectionViewCell *cell = [super collectionView:collectionView cellForItemAtIndexPath:indexPath];
-    
     JSQMessage *message = _messages[indexPath.item];
     if (message.senderId == self.senderId) {
         cell.textView.textColor = [UIColor whiteColor];
     } else {
         cell.textView.textColor = [UIColor blackColor];
     }
-    
     return cell;
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath {
     JSQMessage *message = _messages[indexPath.row];
-    if (message.isMediaMessage) {
-        JSQVideoMediaItem *mediaItem = (JSQVideoMediaItem *)message.media;
-        if (mediaItem != nil) {
-            AVPlayer *player = [AVPlayer playerWithURL:mediaItem.fileURL];
+    id<JSQMessageMediaData> mediaItem = message.media;
+    
+    if ([mediaItem isKindOfClass:[JSQVideoMediaItem class]]) {
+        JSQVideoMediaItem *mediaVideoItem = (JSQVideoMediaItem *)message.media;
+        if (mediaVideoItem != nil) {
+            AVPlayer *player = [AVPlayer playerWithURL:mediaVideoItem.fileURL];
             AVPlayerViewController *playerViewController = [AVPlayerViewController new];
             playerViewController.player = player;
             [self presentViewController:playerViewController animated:true completion:nil];
         }
+    } else if ([mediaItem isKindOfClass:[JSQPhotoMediaItem class]]) {
+        JSQPhotoMediaItem *mediaPhotoItem = (JSQPhotoMediaItem *)message.media;
+        if (mediaPhotoItem != nil) {
+            UIImageView *image = [[UIImageView alloc] initWithImage:mediaPhotoItem.image];
+            image.bounds = CGRectMake(0, 0, self.view.frame.size.width / 1.5, self.view.frame.size.height / 1.5);
+            zoomPopup *popup = [[zoomPopup alloc] initWithMainview:self.view andStartRect:CGRectMake(self.view.frame.size.width/2, self.view.frame.size.height/2, 0, 0)];
+            [popup showPopup:image];
+        }
     }
 }
+
 
 - (void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
     FIRDatabaseReference *itemReference = [[[_databaseReference child:@"message"] child:[NSString stringWithFormat:@"%@", _convoId]] childByAutoId];
@@ -134,7 +146,7 @@
     
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
-    [self finishSendingMessageAnimated:YES];
+    [self finishSendingMessageAnimated:true];
 }
 
 - (void)didPressAccessoryButton:(UIButton *)sender {
@@ -165,6 +177,10 @@
     [self presentViewController:picker animated:true completion:nil];
 }
 
+-(void)imageToFullScreen{
+    
+}
+
 - (void)observeMessages {
     FIRDatabaseQuery *messagesQuery = [[_databaseReference child:[NSString stringWithFormat:@"message/%@", _convoId]] queryLimitedToLast:25];
     [messagesQuery observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
@@ -186,7 +202,7 @@
                 [_messages addObject:[JSQMessage messageWithSenderId:ID displayName:@"" media:videoItem]];
             }
             
-            [self finishReceivingMessage];
+            [self finishReceivingMessageAnimated:true];
         }
     }];
 }

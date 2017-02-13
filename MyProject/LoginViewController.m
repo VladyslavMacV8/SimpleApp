@@ -64,10 +64,10 @@
 - (void)animationInfo {
     _label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, _loginButton.center.x + 30.0, self.view.frame.size.width, 30.0)];
     _label.backgroundColor = [UIColor clearColor];
-    _label.font = [UIFont fontWithName:@"HelveticaNeue" size:13];
+    _label.font = [UIFont fontWithName:@"HelveticaNeue" size:10];
     _label.textAlignment = NSTextAlignmentCenter;
     _label.textColor = [UIColor blueColor];
-    _label.text = @"This is simple chat and now available enter only via Facebook";
+    _label.text = @"The simple chat and now available enter only via Facebook";
     [self.view addSubview:_label];
     
     CABasicAnimation *flyLeft = [CABasicAnimation animationWithKeyPath:@"position.x"];

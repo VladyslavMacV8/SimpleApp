@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0tJ-Gz-sI5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0tJ-Gz-sI5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search" id="h1g-qW-hsW">
-                            <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
@@ -423,28 +423,51 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main" translatesAutoresizingMaskIntoConstraints="NO" id="93H-Eq-rkv">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcR-4p-UMl">
-                                <rect key="frame" x="209" y="296" width="150" height="75"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="N3P-Zz-Cml">
+                                <rect key="frame" x="15" y="256" width="345" height="155"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="0sO-2y-QYK">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="75"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHm-NS-zTf">
+                                                <rect key="frame" x="0.0" y="0.0" width="125" height="75"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="125" id="03p-k0-lQf"/>
+                                                    <constraint firstAttribute="height" constant="75" id="BVh-ta-Zlu"/>
+                                                </constraints>
+                                                <state key="normal" title="Button" image="chat"/>
+                                                <connections>
+                                                    <segue destination="R3k-xq-UyJ" kind="show" id="3jV-Vj-hYQ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="QHl-Dk-cT0">
+                                        <rect key="frame" x="0.0" y="80" width="345" height="75"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcR-4p-UMl">
+                                                <rect key="frame" x="220" y="0.0" width="125" height="75"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="75" id="GZ2-ht-JBR"/>
+                                                    <constraint firstAttribute="width" constant="125" id="HMI-NA-Tk2"/>
+                                                </constraints>
+                                                <state key="normal" title="Button" image="car"/>
+                                                <connections>
+                                                    <segue destination="LBk-Yk-Esk" kind="show" id="b3e-55-C98"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="U3H-rv-1Xn"/>
-                                    <constraint firstAttribute="height" constant="75" id="aGH-qY-Eyt"/>
+                                    <constraint firstAttribute="bottom" secondItem="QHl-Dk-cT0" secondAttribute="bottom" id="8Id-tN-Mm7"/>
+                                    <constraint firstItem="QHl-Dk-cT0" firstAttribute="leading" secondItem="N3P-Zz-Cml" secondAttribute="leading" id="f99-gf-L3a"/>
+                                    <constraint firstAttribute="trailing" secondItem="0sO-2y-QYK" secondAttribute="trailing" id="fF9-YV-NxO"/>
+                                    <constraint firstAttribute="trailing" secondItem="QHl-Dk-cT0" secondAttribute="trailing" id="gFU-MA-gN8"/>
+                                    <constraint firstItem="0sO-2y-QYK" firstAttribute="leading" secondItem="N3P-Zz-Cml" secondAttribute="leading" id="gNn-uL-6go"/>
+                                    <constraint firstItem="0sO-2y-QYK" firstAttribute="top" secondItem="N3P-Zz-Cml" secondAttribute="top" id="lWN-fv-6iX"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="car"/>
-                                <connections>
-                                    <segue destination="LBk-Yk-Esk" kind="show" id="b3e-55-C98"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHm-NS-zTf">
-                                <rect key="frame" x="16" y="296" width="150" height="75"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="NeV-8j-42X"/>
-                                    <constraint firstAttribute="height" constant="75" id="ZFm-35-8ir"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="chat"/>
-                                <connections>
-                                    <segue destination="R3k-xq-UyJ" kind="show" id="3jV-Vj-hYQ"/>
-                                </connections>
-                            </button>
+                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Developed by private person Kudelia Vladyslav, version 0.1a" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aBi-Hs-x0I">
                                 <rect key="frame" x="25" y="587" width="325" height="75"/>
                                 <constraints>
@@ -475,12 +498,12 @@
                             <constraint firstItem="93H-Eq-rkv" firstAttribute="top" secondItem="Ygb-9n-gdS" secondAttribute="bottom" constant="-20" id="1NV-ee-Q1c"/>
                             <constraint firstItem="7Eb-CO-9Gh" firstAttribute="top" secondItem="Ygb-9n-gdS" secondAttribute="bottom" constant="5" id="3AK-0z-heS"/>
                             <constraint firstItem="XKR-Dm-lLi" firstAttribute="top" secondItem="93H-Eq-rkv" secondAttribute="bottom" id="3bL-LM-Tls"/>
+                            <constraint firstItem="N3P-Zz-Cml" firstAttribute="leading" secondItem="Heg-Ns-QgX" secondAttribute="leading" constant="15" id="ENN-xY-1he"/>
+                            <constraint firstAttribute="trailing" secondItem="N3P-Zz-Cml" secondAttribute="trailing" constant="15" id="L4I-OH-omo"/>
                             <constraint firstItem="aBi-Hs-x0I" firstAttribute="centerX" secondItem="Heg-Ns-QgX" secondAttribute="centerX" id="Qbp-5t-Wxg"/>
-                            <constraint firstItem="93H-Eq-rkv" firstAttribute="leading" secondItem="DHm-NS-zTf" secondAttribute="trailing" constant="-166" id="Ybm-pF-8f7"/>
+                            <constraint firstItem="N3P-Zz-Cml" firstAttribute="centerY" secondItem="93H-Eq-rkv" secondAttribute="centerY" id="XQc-tR-Txp"/>
                             <constraint firstItem="XKR-Dm-lLi" firstAttribute="top" secondItem="aBi-Hs-x0I" secondAttribute="bottom" constant="5" id="f2k-BR-fwT"/>
-                            <constraint firstItem="hcR-4p-UMl" firstAttribute="leading" secondItem="93H-Eq-rkv" secondAttribute="trailing" constant="-166" id="kRT-Y5-HZd"/>
-                            <constraint firstItem="hcR-4p-UMl" firstAttribute="centerY" secondItem="Heg-Ns-QgX" secondAttribute="centerY" id="mIO-Qc-qYw"/>
-                            <constraint firstItem="DHm-NS-zTf" firstAttribute="centerY" secondItem="Heg-Ns-QgX" secondAttribute="centerY" id="oQo-J2-roA"/>
+                            <constraint firstItem="N3P-Zz-Cml" firstAttribute="centerX" secondItem="Heg-Ns-QgX" secondAttribute="centerX" id="h59-on-Ymm"/>
                             <constraint firstAttribute="trailing" secondItem="93H-Eq-rkv" secondAttribute="trailing" id="paZ-ku-wGQ"/>
                             <constraint firstItem="7Eb-CO-9Gh" firstAttribute="centerX" secondItem="Heg-Ns-QgX" secondAttribute="centerX" id="rMq-fw-Mii"/>
                             <constraint firstItem="93H-Eq-rkv" firstAttribute="leading" secondItem="Heg-Ns-QgX" secondAttribute="leading" id="xrU-cL-uQa"/>
